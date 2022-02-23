@@ -17,11 +17,11 @@ public class StudentRest {
     @Inject
     StudentService studentService;
 
-    @Path("new")
+    @Path("")
     @POST
     public Response createStudent(Student student, @Context UriInfo uriInfo) {
         studentService.createStudent(student);
-        if(student==null){
+        if (student == null) {
             throw new WebApplicationException(Response.status(Response.Status.NOT_FOUND)
                     .entity("No students were found.").type(MediaType.TEXT_PLAIN_TYPE)
                     .type(MediaType.APPLICATION_JSON)
@@ -32,11 +32,11 @@ public class StudentRest {
         return Response.created(uriBuilder.build()).build();
     }
 
-    @Path("getall")
+    @Path("")
     @GET
     public Response getAllStudents() {
         List<Student> foundStudents = studentService.getAllStudents();
-        if(foundStudents==null){
+        if (foundStudents == null) {
             throw new WebApplicationException(Response.status(Response.Status.NOT_FOUND)
                     .entity("No students were found.").type(MediaType.TEXT_PLAIN_TYPE)
                     .type(MediaType.APPLICATION_JSON)
@@ -45,13 +45,13 @@ public class StudentRest {
         return Response.ok(foundStudents).build();
     }
 
-    @Path("")
+    @Path("{id}")
     @PUT
     public Response updateStudent(Student student) {
 
         studentService.updateStudent(student);
 
-        if(student==null){
+        if (student == null) {
             throw new WebApplicationException(Response.status(Response.Status.NOT_FOUND)
                     .entity("No students were found.").type(MediaType.TEXT_PLAIN_TYPE)
                     .type(MediaType.APPLICATION_JSON)
@@ -64,19 +64,18 @@ public class StudentRest {
     @Path("{id}")
     @DELETE
     public Response deleteStudent(@PathParam("id") Long id) {
-        studentService.deleteStudent(id);
         Student foundStudent = studentService.findStudentById(id);
         if (foundStudent == null) {
-            throw new WebApplicationException(Response.status(Response.Status.METHOD_NOT_ALLOWED)
-                    .entity("Item with ID " + id + " does not exist or have been deleted.")
+            throw new WebApplicationException(Response.status(Response.Status.NOT_FOUND)
+                    .entity("Item does not exist or have been deleted.")
                     .type(MediaType.APPLICATION_JSON)
                     .build());
         }
+        studentService.deleteStudent(id);
         return Response.ok().build();
     }
 
-
-    @Path("bylastname")
+    @Path("{id}")
     @GET
     public Response getStudentByLastname(@QueryParam("lastName") String lastName) {
         if (lastName == null) {
