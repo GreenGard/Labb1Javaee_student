@@ -5,8 +5,10 @@ import se.iths.service.StudentService;
 
 import javax.annotation.security.PermitAll;
 import javax.inject.Inject;
+import javax.persistence.EntityManager;
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
+import java.sql.PreparedStatement;
 import java.util.List;
 
 @Path("students")
@@ -50,6 +52,7 @@ public class StudentRest {
     public Response updateStudent(Student student) {
 
         studentService.updateStudent(student);
+
 
         if (student == null) {
             throw new WebApplicationException(Response.status(Response.Status.NOT_FOUND)

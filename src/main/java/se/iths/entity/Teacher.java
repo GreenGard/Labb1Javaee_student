@@ -1,11 +1,10 @@
 package se.iths.entity;
 
-import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 
 @Entity
-public class Student {
+public class Teacher {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -16,32 +15,17 @@ public class Student {
     @NotEmpty
     private String email;
     private String phoneNumber;
-
     @ManyToOne
     private Subject subject;
 
-    public Student(String firstName, String lastName, String email, String phoneNumber) {
-        this.id = id;
+    public Teacher() {
+    }
+
+    public Teacher(String firstName, String lastName, String email, String phoneNumber) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.phoneNumber = phoneNumber;
-    }
-
-    public Student() {
-
-    }
-    @JsonbTransient
-    public Subject getSubject() {
-        return subject;
-    }
-
-    public void setSubject(Subject subject) {
-        this.subject = subject;
-    }
-
-    public Long getId() {
-        return id;
     }
 
     public String getFirstName() {
