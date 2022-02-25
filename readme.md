@@ -45,3 +45,7 @@ Queryparam
 name=lastName 
 value="example"
 
+Get all info by Subject
+@GET
+http://localhost:8080/student-management-system/api/v1/subjects/
+parameters:none
