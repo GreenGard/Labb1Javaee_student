@@ -19,7 +19,6 @@ public class Student {
 
     @ManyToOne
     private Subject subject;
-
     public Student(String firstName, String lastName, String email, String phoneNumber) {
         this.id = id;
         this.firstName = firstName;
@@ -29,15 +28,15 @@ public class Student {
     }
 
     public Student() {
-
-    }
-    @JsonbTransient
-    public Subject getSubject() {
-        return subject;
     }
 
     public void setSubject(Subject subject) {
         this.subject = subject;
+    }
+
+    @JsonbTransient
+    public Subject getSubject() {
+        return subject;
     }
 
     public Long getId() {

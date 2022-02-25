@@ -23,7 +23,6 @@ public class StudentService {
     }
 
     public void updateStudent(Student student) {
-
         entityManager.merge(student);
     }
 
@@ -41,6 +40,4 @@ public class StudentService {
         query.setParameter(1, lastName).getResultList();
         return  query.getResultList();
     }
-
-
 }

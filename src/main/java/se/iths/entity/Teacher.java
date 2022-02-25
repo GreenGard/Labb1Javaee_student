@@ -1,5 +1,6 @@
 package se.iths.entity;
 
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 
@@ -18,14 +19,28 @@ public class Teacher {
     @ManyToOne
     private Subject subject;
 
-    public Teacher() {
-    }
-
     public Teacher(String firstName, String lastName, String email, String phoneNumber) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.phoneNumber = phoneNumber;
+    }
+
+    public Teacher() {
+    }
+
+    public void setSubject(Subject subject) {
+        this.subject = subject;
+    }
+
+    @JsonbTransient
+    public Subject getSubject() {
+        return subject;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public String getFirstName() {
